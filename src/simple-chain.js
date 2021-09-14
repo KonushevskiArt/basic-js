@@ -6,23 +6,42 @@ import { NotImplementedError } from '../extensions/index.js';
  */
 export default {
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink( value = '' ) {
+    if (!this.chain || this.chain === null) {
+      this.chain = `( ${String(value)} )`;
+    } else {
+      this.chain += `~~( ${String(value)} )`;
+    }
+    if (this.length) {
+      this.length += 1;
+    } else {
+      this.length = 1;
+    } 
+    return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink( position ) {
+    
+    const arr = this.chain.split('~~')
+    if ((typeof (Number(position)) === 'number') && arr[+position - 1]) {
+      arr.splice(+position - 1, 1)
+      this.chain = arr.join('~~');
+    } else {
+      this.chain = null;
+      throw new Error(`You can't remove incorrect link!`);
+    }
+    return this;
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (this.chain !== null && this.chain) {
+      this.chain = this.chain.split('~~').reverse().join('~~');
+    }
+    return this;
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    const res = this.chain
+    this.chain = null;
+    return res;
   }
 };

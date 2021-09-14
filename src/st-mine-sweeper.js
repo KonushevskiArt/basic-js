@@ -23,7 +23,60 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+const fillMatrix = (matrix) => matrix.map((el) => el.map(el => el = 0));
+
+export default function minesweeper ( matrix ) {
+  const emptyMatrix = fillMatrix(matrix);
+  let chunk;
+
+  for (let i = 0; i < matrix.length; i++) {
+    chunk = matrix[i];
+    for (let j = 0; j < chunk.length; j++) {
+      console.log(emptyMatrix)
+      if (chunk[j] === true) {
+        
+        try {
+          if (typeof emptyMatrix[i][j + 1] === 'number') {
+            emptyMatrix[i][j + 1] += 1;
+          }
+        } catch (error) {};
+        try {
+          if (typeof emptyMatrix[i][j - 1] === 'number') {
+            emptyMatrix[i][j - 1] += 1;
+          }
+        } catch (error) {};
+        try {
+          if (typeof emptyMatrix[i - 1][j] === 'number') {
+            emptyMatrix[i - 1][j] += 1;
+          }
+        } catch (error) {}
+        try {
+          if (typeof emptyMatrix[i - 1][j - 1] === 'number') {
+            emptyMatrix[i - 1][j - 1] += 1;
+          }
+        } catch (error) {}
+        try {
+          if (typeof emptyMatrix[i - 1][j + 1] === 'number') {
+            emptyMatrix[i - 1][j + 1] += 1;
+          }
+        } catch (error) {}
+        try {
+          if (typeof emptyMatrix[i + 1][j] === 'number') {
+            emptyMatrix[i + 1][j] += 1;
+          }
+        } catch (error) {}
+        try {
+          if (typeof emptyMatrix[i + 1][j + 1] === 'number') {
+            emptyMatrix[i + 1][j + 1] += 1;
+          }
+        } catch (error) {}
+        try {
+          if (typeof emptyMatrix[i + 1][j - 1] === 'number') {
+            emptyMatrix[i + 1][j - 1] += 1;
+          }
+        } catch (error) {}
+      } 
+    }
+  }
+  return emptyMatrix;
 }
