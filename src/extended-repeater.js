@@ -15,7 +15,25 @@ import { NotImplementedError } from '../extensions/index.js';
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-export default function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function repeater( str, options ) {
+  const {
+    repeatTimes = 1,
+    separator = '+',
+    addition = '',
+    additionRepeatTimes = 1,
+    additionSeparator = '|'
+  } = options;
+  
+  let res = '';
+  const customDevider = 'RrY1{)';
+  const convertedStr = String(str)
+  const convertedAddition = String(addition)
+
+  for (let i = 0; i < repeatTimes; i++) {
+    let fullAddition = new Array(additionRepeatTimes).fill(convertedAddition).join(additionSeparator);
+    
+    res += convertedStr + fullAddition + customDevider ;
+  }
+
+  return res.split(customDevider).filter((el) => el !== '').join(separator);
 }
